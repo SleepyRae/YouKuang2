@@ -3,9 +3,11 @@ package com.kfr.youkuang.dao;
 import com.kfr.youkuang.entity.Type;
 import com.kfr.youkuang.mapper.TypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class TypeDao {
     private final TypeMapper typeMapper;
 

@@ -3,9 +3,11 @@ package com.kfr.youkuang.service;
 import com.kfr.youkuang.dao.TypeDao;
 import com.kfr.youkuang.entity.Type;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TypeService {
     private final TypeDao typeDao;
 
