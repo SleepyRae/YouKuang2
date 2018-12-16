@@ -1,6 +1,5 @@
 package com.kfr.youkuang.mapper;
 
-import com.kfr.youkuang.entity.Account;
 import com.kfr.youkuang.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,20 +14,15 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface UserMapper {
+    //按姓名查找用户
     @Select("SELECT * FROM youkuang_user where userName = #{userName}")
     User selectUserByUserName(@Param("userName") final String userName);
+    //按ID查找用户
+    @Select("SELECT * FROM youkuang_user where userID = #{userID}")
+    User selectUserByUserID(@Param("userID") final int userID);
 
-    @Select("SELECT * FROM account WHERE AcountName = #{AccountName}")
-    Account selectAccountByAccountName(@Param("AccountName") final String AccountName);
-
+    //插入新用户
     @Insert("INSERT INTO youkuang_user(userName, password) values(#{userName}, #{password})")
     void insertOneUser(@Param("userName") final String userName,
                        @Param("password") final String password);
-
-    @Insert("INSERT INTO account(AccountName, UserID) values(#{AccountName}, #{UserID})")
-    void  insertOneAccount(@Param("AccountName") final String AccountName,
-                           @Param("userName") final String userName);
-
-    @Select("SELECT * FROM youkuang_user WHERE userID = #{userID}")
-    User selectUserByUserID(@Param("userID") final int userID);
 }

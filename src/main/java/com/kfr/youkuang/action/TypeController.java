@@ -17,17 +17,17 @@ public class TypeController {
         this.typeService = typeService;
     }
 
-    @GetMapping("/selecttype")
+    @GetMapping("/recordTypes")
     public Type selecttypeByID(final int tID) {
         return typeService.selecttypeByID(tID);
     }
 
-    @GetMapping("/selecttype")
+    @GetMapping("/recordTypes")
     public Type selecttypeByName(final String typename) {
         return typeService.selecttypeByName(typename);
     }
 
-    @GetMapping("/selecttype")
+    @GetMapping("/recordTypes")
     public List<Type> getAlltype() {
         return typeService.getAlltype();
     }

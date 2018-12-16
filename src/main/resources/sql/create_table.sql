@@ -1,6 +1,7 @@
 drop table youkuang_user;
 drop table account;
 drop table type;
+drop table account_item;
 create table youkuang_user(
   userId serial,
   userName varchar(32) not null,
@@ -11,7 +12,7 @@ create table account(
   accountID serial,
   accountName varchar(32) not null,
   UserID int not null,
-  sum double precision,
+  sum numeric,
   lastModifiedTime timestamp,
   createdTime timestamp,
   primary key (AccountID)
