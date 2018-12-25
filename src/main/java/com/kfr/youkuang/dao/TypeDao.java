@@ -16,7 +16,7 @@ public class TypeDao {
         this.typeMapper = typeMapper;
     }
 
-    public Type selectType(final String typename){
+    public Type selectType(final String typename) {
         return typeMapper.selectType(typename);
     }
 

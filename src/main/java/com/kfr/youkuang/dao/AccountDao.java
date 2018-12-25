@@ -1,10 +1,13 @@
 package com.kfr.youkuang.dao;
 
-import com.kfr.youkuang.Util;
 import com.kfr.youkuang.entity.Account;
 import com.kfr.youkuang.mapper.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -25,26 +28,25 @@ public class AccountDao {
         return accountMapper.selectAccountByAccountID(AccountID);
     }
 
-    public void insertOneAccount(final Account account){
-        final  int accountID = account.getAccountID();
-        final  int userID = account.getUserID();
-        accountMapper.insertOneAccount(accountID, userID);
-        accountMapper.createNewAccountTable("UAT"+ userID + "_" + accountID);
+    public void insertOneAccount(final Account account) {
+        final String accountName = account.getAccountName();
+        final int userID = account.getUserID();
+        final BigDecimal sum = account.getSum();
+        final Timestamp lastModifiedTime = account.getLastModifiedTime();
+        final Timestamp createTime = account.getCreatedTime();
+        accountMapper.insertOneAccount(accountName, userID, sum, lastModifiedTime, createTime);
+        // todo selectAccountByAccountName() 注册多个用户时会报错
+        int accountID = selectAccountByAccountName(accountName).getAccountID();
+        accountMapper.createNewAccountTable("UAT" + userID + "_" + accountID);
     }
 
     public boolean deleteAccount(int delAccountID, int delUserID) {
         String tableName = delUserID + "_" + delAccountID;
         accountMapper.dropAccountTable(tableName);
-        return  accountMapper.deleteAccount(delAccountID, delUserID);
+        return accountMapper.deleteAccount(delAccountID, delUserID);
     }
 
     public List<Account> getAllAccountsByUserID(final int userID) {
-        List accountIDs = accountMapper.getaccountsIDbyUserID(userID);
-        List<Account> allAccounts = null;
-        for(int i = 0; i <accountIDs.size() ; i++){
-            Account a = accountMapper.selectAccountByAccountID((Integer) accountIDs.get(i));
-            allAccounts.add(a);
-        }
-        return accountIDs;
+        return accountMapper.getaccountsIDbyUserID(userID);
     }
 }

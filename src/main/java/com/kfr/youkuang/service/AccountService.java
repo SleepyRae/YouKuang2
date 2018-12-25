@@ -5,7 +5,6 @@ import com.kfr.youkuang.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,12 +24,14 @@ public class AccountService {
         return accountDao.getAllAccountsByUserID(userID);
     }
 
-    public ServiceStatus createAccount(final Account newAccount){
-        final int newAccountID= newAccount.getAccountID();
-        Account selectedAccount = accountDao.selectAccountByAccountID(newAccountID);
-        if(selectedAccount == null){
+    public ServiceStatus createAccount(final Account newAccount) {
+        final String newAccountName = newAccount.getAccountName();
+        Account selectedAccount = accountDao.selectAccountByAccountName(newAccountName);
+        if (selectedAccount == null) {
+            System.out.println(newAccount);
             accountDao.insertOneAccount(newAccount);
-            return  new ServiceStatus(ServiceStatus.SUCCEED, "创建账本成功"); //是否用UserServiceStatus？
+
+            return new ServiceStatus(ServiceStatus.SUCCEED, "创建账本成功"); //是否用UserServiceStatus？
         } else {
             return new ServiceStatus(ServiceStatus.FAILED, "账本名已存在");
         }
@@ -39,10 +40,10 @@ public class AccountService {
     public ServiceStatus deleteAccount(final Account account) {
         final int delAccountID = account.getAccountID();
         final int delUserID = account.getUserID();
-        if(accountDao.deleteAccount(delAccountID,delUserID )){
-            return  new ServiceStatus(ServiceStatus.SUCCEED, "删除账本成功");
-        }else{
-            return  new ServiceStatus(ServiceStatus.FAILED, "删除账本失败");
+        if (accountDao.deleteAccount(delAccountID, delUserID)) {
+            return new ServiceStatus(ServiceStatus.SUCCEED, "删除账本成功");
+        } else {
+            return new ServiceStatus(ServiceStatus.FAILED, "删除账本失败");
         }
     }
 }

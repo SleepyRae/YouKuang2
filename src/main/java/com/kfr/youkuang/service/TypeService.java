@@ -16,7 +16,7 @@ public class TypeService {
         this.typeDao = typeDao;
     }
 
-    public Type selecttypeByName(String typename){
+    public Type selecttypeByName(String typename) {
         return typeDao.selectType(typename);
     }
 

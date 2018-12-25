@@ -1,33 +1,54 @@
 package com.kfr.youkuang.entity;
 
-import java.sql.Date;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Account {
-    private String accountName;
     private int accountID;
-    private String userName;
+
+    private String accountName;
+
     private int userID;
-    private double sum;
-    private long lastModifiedTime;
-    private long createdTime;
-    private String tablename;
+
+    private BigDecimal sum;
+
+    private Timestamp lastModifiedTime;
+
+    private Timestamp createdTime;
+
+
+    public Account(final int accountID,
+                   final String accountName,
+                   final int userID,
+                   final BigDecimal sum,
+                   final Timestamp lastModifiedTime,
+                   final Timestamp createdTime) {
+        this.accountID = accountID;
+        this.accountName = accountName;
+        this.userID = userID;
+        this.sum = sum;
+        this.lastModifiedTime = lastModifiedTime;
+        this.createdTime = createdTime;
+    }
 
     public Account(String AccountName, int userID) {
 
         this.accountName = AccountName;
         this.userID = userID;
-        sum = 0;
-        tablename = userID + "_" + accountID;
-        lastModifiedTime = System.currentTimeMillis();
-        createdTime = System.currentTimeMillis();
+        sum = new BigDecimal(0);
+        lastModifiedTime = new Timestamp(System.currentTimeMillis());
+        createdTime = new Timestamp(System.currentTimeMillis());
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "UserName='" + userName + '\'' +
-                ", AccountName='" + accountName + '\'' +
+                "accountName='" + accountName + '\'' +
+                ", accountID=" + accountID +
+                ", userID=" + userID +
+                ", sum=" + sum +
+                ", lastModifiedTime=" + lastModifiedTime +
+                ", createdTime=" + createdTime +
                 '}';
     }
 
@@ -35,8 +56,8 @@ public class Account {
         return accountName;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
     public int getAccountID() {
@@ -47,23 +68,16 @@ public class Account {
         return userID;
     }
 
-    public long getCreatedTime() {
+    public Timestamp getCreatedTime() {
         return createdTime;
     }
 
-    public long getLastModifiedTime() {
+    public Timestamp getLastModifiedTime() {
         return lastModifiedTime;
     }
 
-    public double getSum() {
+    public BigDecimal getSum() {
         return sum;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
-    }
-
-    public String getTablename() {
-        return tablename;
-    }
 }
