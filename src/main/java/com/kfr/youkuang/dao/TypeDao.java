@@ -20,12 +20,12 @@ public class TypeDao {
         return typeMapper.selectType(typename);
     }
 
-    public Type selecttypeByID(int tID) {
-        return typeMapper.selecttypeByID(tID);
+    public Type selectTypeByID(int tID) {
+        return typeMapper.selectTypeByID(tID);
     }
 
-    public List<Type> getAlltype() {
-        return typeMapper.getAlltype();
+    public List<Type> getAllType() {
+        return typeMapper.getAllType();
     }
 
 
